@@ -1,0 +1,83 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Avalonia.POS.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Avalonia.POS.MainWindow"
+        Title="Avalonia.POS"
+        >
+    <Window.DataContext>
+        <viewModels:MainViewModel/>
+    </Window.DataContext>
+    <Grid ColumnDefinitions="3*,*">
+        <Grid RowDefinitions="*,Auto">
+            <ListBox Items="{Binding Transaction.Items}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,*,*,*,*,*,*">
+                            <TextBlock Grid.Column="0"
+                                       HorizontalAlignment="Center"
+                                       Text="{Binding Product.Barcode}"></TextBlock>
+                            <TextBlock Grid.Column="1" 
+                                       HorizontalAlignment="Center" Text="{Binding Product.Description}"></TextBlock>
+                            <TextBlock Grid.Column="2" 
+                                       HorizontalAlignment="Center" Text="{Binding Product.UoM}"></TextBlock>
+                            <TextBlock Grid.Column="3" Text="{Binding Product.VATRate}"></TextBlock>
+                            <TextBlock Grid.Column="4" Text="{Binding Product.Price}"></TextBlock>
+                            <TextBlock Grid.Column="5" Text="{Binding Quantity}"></TextBlock>
+                            <TextBlock Grid.Column="6" Text="{Binding Total}"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid Grid.Row="1"></Grid>
+        </Grid>
+        <Grid Grid.Column="1" RowDefinitions="Auto,*,Auto">
+            <TextBlock 
+                Text="{Binding Transaction.Total}"
+                FontSize="42" 
+                FontWeight="Black"
+                Margin="10"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBlock>
+            <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0 1 0 0">
+                <StackPanel>
+                    <Button Command="{Binding ApplyDiscountCommand}">SC</Button>
+                    <Button Command="{Binding RemoveCommand}">Remove</Button>
+                </StackPanel>
+            </Border>
+            <Grid Grid.Row="2">
+                <Grid RowDefinitions="*,*" ColumnDefinitions="60,*,60,100">
+                    <Label Grid.Row="0" Grid.Column="0" Margin="10 0 0 0">Bcd</Label>
+                    <TextBox 
+                        Name="Barcode"
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Text="{Binding Barcode}"
+                        HorizontalAlignment="Stretch">
+                        <TextBox.KeyBindings>
+                            <KeyBinding 
+                                Gesture="Enter"
+                                Command="{Binding FindCommand}"
+                                CommandParameter="{Binding #Barcode.Text}" ></KeyBinding>
+                        </TextBox.KeyBindings>
+                    </TextBox> 
+                    <Label Grid.Row="0" Grid.Column="2">Qty</Label>
+                    <TextBox 
+                        Grid.Row="0" 
+                        Grid.Column="3" 
+                        Margin="0 0 10 0" 
+                        Text="{Binding Quantity}">
+                        
+                    </TextBox>   
+                    <Button Grid.Column="0" Grid.Row="1" FontSize="36" FontWeight="Bold" 
+                            Grid.ColumnSpan="4"
+                            Margin="10 10 10 20"
+                            HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch">Checkout</Button>        
+                </Grid>
+            </Grid>
+            
+        </Grid>
+    </Grid>
+</Window>

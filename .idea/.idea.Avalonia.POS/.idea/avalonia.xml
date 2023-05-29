@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Avalonia.POS/MainWindow.axaml" value="Avalonia.POS/Avalonia.POS.csproj" />
+        <entry key="Avalonia.POS/RemoveItemDialog.axaml" value="Avalonia.POS/Avalonia.POS.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

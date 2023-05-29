@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Avalonia.POS.ViewModels"
+        xmlns:visualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Avalonia.POS.RemoveItemDialog"
+        CanResize="False"
+        Width="350"
+        Height="120"
+        WindowStartupLocation="CenterOwner"
+        Title="RemoveItemDialog">
+        <Window.DataContext>
+                <viewModels:MainViewModel/>
+        </Window.DataContext>
+        
+        <StackPanel Margin="10">
+                <Grid ColumnDefinitions="Auto,*">
+                        <Label Grid.Column="0" Margin="10 0 10 0">Bcd</Label>
+                        <TextBox Grid.Column="1" x:Name="Barcode" >
+                                <TextBox.KeyBindings>
+                                        <KeyBinding 
+                                                Gesture="Enter"
+                                                Command="{Binding RemoveItemCommand}"
+                                                CommandParameter="{Binding #Barcode.Text}"></KeyBinding>
+                                </TextBox.KeyBindings>
+                        </TextBox>
+                </Grid> 
+        </StackPanel>
+</Window>
